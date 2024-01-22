@@ -2,5 +2,11 @@
 
 <h1><%= title %></h1>
 <p><%= content %></p>
+<button formaction="/edit" class="btn btn-primary" type="submit" name="submit">
+  Edit
+</button>
+<button formaction="/delete" class="btn btn-danger" type="submit" name="submit">
+  Delete
+</button>
 
 <%- include('partials/footer.ejs'); %>

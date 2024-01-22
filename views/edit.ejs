@@ -1,0 +1,29 @@
+<%- include("partials/header.ejs"); -%>
+
+<h1>Edit Post</h1>
+
+<form action="/edit/<%= post._id %>" method="post">
+  <label for="postTitle">Title</label>
+  <input
+    type="text"
+    id="postTitle"
+    name="postTitle"
+    value="<%= post.title %>"
+    required
+  />
+
+  <label for="postBody">Content</label>
+  <textarea id="postBody" name="postBody" rows="5" required>
+<%= post.content %></textarea
+  >
+
+  <button type="submit">Update Post</button>
+</form>
+
+<form action="/delete/<%= post._id %>" method="post">
+  <button type="submit">Delete Post</button>
+</form>
+
+<a href="/">Back to Home</a>
+
+<%- include('partials/footer.ejs'); -%>

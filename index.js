@@ -62,9 +62,14 @@ app.get('/posts/:postName', (req, res) => {
     }
   });
 });
-// app.put('/edit', (req, res) => {
-//   res.render();
-// });
+
+app.post('/edit', (req, res) => {
+  res.render();
+});
+
+app.delete('/delete', (req, res) => {
+  const post = req.body.post;
+});
 
 app.listen(port, () => {
   console.log(`app listening on port ${port}`);
