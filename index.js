@@ -3,13 +3,14 @@ import bodyParser from 'body-parser';
 import _ from 'lodash';
 
 const homeStartingContent =
-  'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi ipsa, soluta debitis officiis adipisci aspernatur doloremque eaque et blanditiis voluptatum vel, ad, suscipit at rerum in quaerat facilis explicabo totam!';
+  'Welcome to BloggerBox, your personalized gateway to personal blogging! Are you passionate about sharing your thoughts, experiences, and creativity with yourself? Look no further. BloggerBox is a tailor-made application designed for individuals who aspire to express themselves freely through the art of blogging.  our user-friendly platform provides the perfect space for you to unleash your creativity. With BloggerBox, you have the power to blog about anything that inspires you';
 
 const aboutContent =
-  'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi ipsa, soluta debitis officiis adipisci aspernatur doloremque eaque et blanditiis voluptatum vel, ad, suscipit at rerum in quaerat facilis explicabo totam!';
+  'BloggerBox is an application that was built with Node.js, Express.js and EJS. HTML, CSS and Boostrap were used for styling and structure! BloggerBox is not connected to a database so no data will persist through multiple sessions';
 
-const contactContent =
-  'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi ipsa, soluta debitis officiis adipisci aspernatur doloremque eaque et blanditiis voluptatum vel, ad, suscipit at rerum in quaerat facilis explicabo totam!';
+const contactContent = 'Feel free to contact me by the following:';
+
+let lastId = 0;
 
 const app = express();
 const port = 3000;
@@ -36,39 +37,38 @@ app.get('/create', (req, res) => {
 });
 
 app.post('/create', (req, res) => {
+  const newId = (lastId += 1);
   const post = {
+    id: newId,
     title: req.body.postTitle,
     content: req.body.postBody,
+    author: req.body.postAuthor,
+    date: new Date(),
   };
 
+  lastId = newId;
   posts.push(post);
-
-  res.redirect('/');
+  res.status(201).redirect('/');
 });
 
-app.get('/posts/:postName', (req, res) => {
-  const requestedTitle = _.lowerCase(req.params.postName);
+app.get('/posts/:id', (req, res) => {
+  const requestedId = parseInt(req.params.id);
 
   posts.forEach((post) => {
-    const storedTitle = _.lowerCase(post.title);
+    const storedId = post.id;
 
-    if (storedTitle === requestedTitle) {
+    if (storedId === requestedId) {
       res.render('post.ejs', {
+        id: post.id,
         title: post.title,
         content: post.content,
+        author: post.author,
+        date: post.date,
       });
     } else {
       console.log('Not a Match');
     }
   });
-});
-
-app.post('/edit', (req, res) => {
-  res.render();
-});
-
-app.delete('/delete', (req, res) => {
-  const post = req.body.post;
 });
 
 app.listen(port, () => {

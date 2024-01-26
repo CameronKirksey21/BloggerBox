@@ -1,12 +1,23 @@
 <%- include("partials/header.ejs"); -%>
 
-<h1>Home</h1>
-<p><%=content%></p>
+<div class="container">
+  <h1>Home</h1>
+  <p><%=content%></p>
+</div>
+
+<div class="createBtn-container">
+  <a id="createPostBtn" href="/create">Create Post</a>
+</div>
 
 <%posts.forEach((post) => {%>
-<h1><%=post.title%></h1>
-<p>
-  <%=post.content.substring(0, 100) + "..."%>
-  <a href="/posts/<%=post.title%>"> Read More</a>
-</p>
+<div class="post-container">
+  <h1><%=post.title%></h1>
+  <small>By: <%= post.author %></small>
+  <small><%= post.date %></small>
+  <p>
+    <%=post.content.substring(0, 100) + "..."%>
+    <a href="/posts/<%=post.id%>"> Read More</a>
+  </p>
+</div>
+
 <%})%> <%- include('partials/footer.ejs'); -%>
