@@ -1,21 +1,67 @@
-<%- include("partials/header.ejs"); %>
-<div class="container">
-  <h1>Create A Post</h1>
-  <form class="createPostForm" action="/create" method="post">
-    <div class="form-group">
-      <label>Title</label>
-      <input class="form-control" type="text" name="postTitle" />
-      <label>Post</label>
-      <textarea
-        class="form-control"
-        name="postBody"
-        rows="3"
-        cols="30"
-      ></textarea>
-      <label>Author</label>
-      <input class="form-control" type="text" name="postAuthor" />
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <%- include("partials/header.ejs"); %> <% if (locals.postId) { %>
+
+    <div class="container">
+      <h1>Edit Post</h1>
+      <form class="createPostForm" action="/update" method="post">
+        <input
+          type="text"
+          name="title"
+          placeholder="Title"
+          value="<% title %>"
+          required
+        />
+        <textarea
+          name="content"
+          id="content"
+          cols="30"
+          rows="10"
+          placeholder="Content"
+          style="resize: none"
+        >
+<%=content%></textarea
+        >
+        <input hidden type="text" name="index" value="<%= postId %>" />
+        <button class="btn btn-dark" type="submit" name="submit">
+          Update Post
+        </button>
+      </form>
     </div>
-    <button class="btn btn-dark" type="submit" name="submit">Submit</button>
-  </form>
-</div>
-<%- include('partials/footer.ejs'); %>
+    <% } else { %>
+    <div class="container">
+      <h1>Create A Post</h1>
+      <form class="createPostForm" action="/save" method="post">
+        <div class="form-group">
+          <input
+            class="form-control"
+            type="text"
+            name="title"
+            placeholder="Title"
+          />
+          <label>Post</label>
+          <textarea
+            class="form-control"
+            name="content"
+            id="content"
+            rows="10"
+            cols="30"
+            placeholder="Content"
+            style="resize: none"
+          ></textarea>
+        </div>
+        <button class="btn btn-dark" type="submit" name="submit">
+          Create Post
+        </button>
+      </form>
+    </div>
+    <% } %> <%- include('partials/footer.ejs'); %>
+  </body>
+</html>

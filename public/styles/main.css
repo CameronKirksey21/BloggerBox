@@ -9,8 +9,6 @@
 body {
   width: 100%;
   overflow: auto;
-  /* height: 100vh; */
-  /* overflow-x: scroll; */
   background-color: #f9fcff;
   background-image: linear-gradient(147deg, #f9fcff 0%, #dee4ea 74%);
   background-attachment: fixed;
@@ -76,6 +74,11 @@ p {
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
 }
 
 .btn {

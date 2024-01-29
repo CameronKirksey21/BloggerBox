@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>View Post</title>
+  </head>
+  <body>
+    <%- include("partials/header.ejs"); %>
+    <div class="container">
+      <h1><%= title %></h1>
+      <p><%= content %></p>
+    </div>
+    <div class="buttons">
+      <form action="/delete" method="post">
+        <input type="text" name="postId" hidden value="<%= postId %>" />
+        <input
+          class="btn btn-danger fs-5 btn-lg my-2 button-rad"
+          type="submit"
+          name="delete"
+          value="Delete"
+        />
+      </form>
+
+      <a href="/edit/<%= postId %>"
+        ><input
+          class="btn btn-light fs-5 btn-lg my-2 button-rad"
+          type="button"
+          value="Edit"
+      /></a>
+    </div>
+    <%- include('partials/footer.ejs'); %>
+  </body>
+</html>

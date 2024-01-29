@@ -9,15 +9,15 @@
   <a id="createPostBtn" href="/create">Create Post</a>
 </div>
 
-<%posts.forEach((post) => {%>
+<% if (posts.length === 0) { %>
+<div class="text-center">
+  <h3>Please make a post... 🙏</h3>
+</div>
+<% } else { %> <%posts.forEach((post) => {%>
 <div class="post-container">
-  <h1><%=post.title%></h1>
-  <small>By: <%= post.author %></small>
-  <small><%= post.date %></small>
-  <p>
-    <%=post.content.substring(0, 100) + "..."%>
-    <a href="/posts/<%=post.id%>"> Read More</a>
-  </p>
+  <h1><a href="/view/<%= posts.indexOf(post) %>"><%=post.title%></a></h1>
+  <small>By: <%= post.date %></small>
+  <p><%=post.content%></p>
 </div>
 
-<%})%> <%- include('partials/footer.ejs'); -%>
+<%})%> <% } %> <%- include('partials/footer.ejs'); -%>
