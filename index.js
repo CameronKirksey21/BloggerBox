@@ -7,8 +7,6 @@ const homeStartingContent =
 const aboutContent =
   'BloggerBox is an application that was built with Node.js, Express.js and EJS. HTML, CSS and Boostrap were used for styling and structure! BloggerBox is not connected to a database so no data will persist through multiple sessions';
 
-const contactContent = 'Feel free to contact me by the following:';
-
 const app = express();
 const port = 3000;
 
@@ -54,7 +52,7 @@ app.get('/about', (req, res) => {
 });
 
 app.get('/contact', (req, res) => {
-  res.render('contact.ejs', { contactContent: contactContent });
+  res.render('contact.ejs');
 });
 
 // View Post
